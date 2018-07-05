@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Nascenia | Time Tracker</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+    <h1>Welcome to time tracker</h1>
+
+    {% for attendence in ['apple', 'mango'] %}
+      {{ attendence }} <br>
+    {% endfor %}
+
+  </body>
+</html>
