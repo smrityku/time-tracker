@@ -4,6 +4,8 @@ from django.contrib import admin
 
 from attendence import views
 
+from django.views.generic import TemplateView
+
 admin.autodiscover()
 
 urlpatterns = [

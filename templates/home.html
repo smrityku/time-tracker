@@ -1,16 +1,45 @@
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
+
 <html>
   <head>
     <meta charset="utf-8">
     <title>Nascenia | Time Tracker</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   </head>
+
   <body>
-    <h1>Welcome to time tracker</h1>
-
-    {% for attendence in ['apple', 'mango'] %}
-      {{ attendence }} <br>
-    {% endfor %}
-
+    <div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active">Welcome to time tracker</li>
+      </ol>
+      <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>In time</th>
+            <th>Out Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for attendence in attendences %}
+            <tr>
+              <td>
+                {{ attendence.user }}
+              </td>
+              <td>
+                {{ attendence.user.email }}
+              </td>
+              <td class="align-middle">
+                {{ attendence.in_time }}
+              </td>
+              <td class="align-middle">
+                {{ attendence.out_time }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

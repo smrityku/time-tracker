@@ -10,7 +10,7 @@ class Attendence(models.Model):
     updated_at = models.DateTimeField(null=True)
 
     def __str__(self):
-    	return self.user
+    	return self.user.username
 
 class Leave(models.Model):
     start_date = models.DateTimeField(null=True)
@@ -24,7 +24,7 @@ class Leave(models.Model):
     updated_at = models.DateTimeField(null=True)
 
     def __str__(self):
-    	return self.user
+    	return self.user.username
 
 class LeaveTracker(models.Model):
 	accured_casual = models.IntegerField(default=0)
@@ -38,4 +38,4 @@ class LeaveTracker(models.Model):
 	updated_at = models.DateTimeField(null=True)
 
 	def __str__(self):
-		return self.user
+		return self.user.username
