@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django import template
 
@@ -7,8 +7,10 @@ from .models import Attendence
 
 def home(request):
 	attendences = Attendence.objects.all()
-
-	return render(request, 'home.html', {'attendences': attendences})
+	if request.user.is_authenticated:
+		return render(request, 'home.html', {'attendences': attendences})
+	else:
+		return redirect('login')
 
 def attendence(request):
 	attendences = Attendence.objects.all()

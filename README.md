@@ -9,19 +9,19 @@ git@github.com:smrityku/time-tracker.git
 Install the requirements:
 
 ```bash
-pip install -r requirements.txt
-```
-
-Setup the local configurations:
-
-```bash
-cp .env.example .env
+sudo pip install -r requirements.txt
 ```
 
 Create the database:
 
 ```bash
 python manage.py migrate
+```
+
+Create Admin user:
+
+```bash
+python manage.py createsuperuser
 ```
 
 Finally, run the development server:
