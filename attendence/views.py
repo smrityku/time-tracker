@@ -9,3 +9,15 @@ def home(request):
 	attendences = Attendence.objects.all()
 
 	return render(request, 'home.html', {'attendences': attendences})
+
+def attendence(request):
+	attendences = Attendence.objects.all()
+
+	return render(request, 'attendence.html', {'attendences': attendences})
+
+def leave_tracker(request, pk):
+	attendences = Attendence.objects.get(pk=pk)
+
+	return render(request, 'home.html', {'attendences': attendences})
+
+
