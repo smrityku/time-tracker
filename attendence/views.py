@@ -20,7 +20,8 @@ def home(request):
 	if request.method == 'POST':
 		if request.POST['type'] == '1':
 			if not user_attendence:
-				Attendence.objects.create(user=request.user, check_in_date=datetime.datetime.now(), in_time=datetime.datetime.now().time(), created_at=datetime.datetime.now(), updated_at=datetime.datetime.now())
+				Attendence.objects.create(user=request.user, check_in_date=datetime.datetime.now(), 
+					in_time=datetime.datetime.now().time(), created_at=datetime.datetime.now(), updated_at=datetime.datetime.now())
 		elif request.POST['type'] == '2':
 			user_attendence.update(out_time = datetime.datetime.now().time())
 	try:
@@ -29,7 +30,9 @@ def home(request):
 		attendences = {}
 
 	if request.user.is_authenticated:
-		return render(request, 'home.html', {'attendences': attendences, 'user_attendence': user_attendence.first, 'today10am': today10am, 'user_length': len(attendences), 'date_today': datetime.datetime.now().strftime("%d %b %Y")})
+		return render(request, 'home.html', 
+			{'attendences': attendences, 'user_attendence': user_attendence.first, 'today10am': today10am, 
+				'user_length': len(attendences), 'date_today': datetime.datetime.now().strftime("%d %B, %Y")})
 	else:
 		return redirect('login')
 
