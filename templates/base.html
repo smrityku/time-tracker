@@ -44,10 +44,9 @@
         </div>
       </nav>
       <div class="container">
-        <ol class="breadcrumb my-4">
-          {% block breadcrumb %}
-          {% endblock %}
-        </ol>
+        {% block log-status %}
+        {% endblock %}
+        
         {% block content %}
         {% endblock %}
       </div>
@@ -56,5 +55,6 @@
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
   </body>
 </html>

@@ -1,36 +1,105 @@
 {% extends 'base.html' %}
 
-{% block breadcrumb %}
-  <li class="breadcrumb-item active">Welcome to time tracker</li>
+{% block log-status %}
+  <div class="log-status">
+    <div class="alert alert-info" role="alert">
+    <div>
+      {% if user_attendence %}
+        <p id="message">Today's in time <b>{{ user_attendence.in_time }} </b>
+        {% if user_attendence.in_time <= today10am %}
+          <span class="label label-success">On time</span>
+        {% else %}
+          <span class="label label-danger">Late</span>
+        {% endif %}
+        </p>  
+      {% else %}   
+        <p id="message">Please Check in</p>  
+      {% endif %}      
+    </div>
+    
+    </div>
+    <div class="row">
+    <div class="col-sm-3">
+      {% if user_attendence %}
+        <input type='submit' value='Check In' class="btn btn-block btn-bottom-margin btn-default disabled"/>
+      {% else %}   
+        <form method='post'>{% csrf_token %}
+          <input type="hidden" name="type" value="1" />
+          <input type='submit' value='Check In' class="btn btn-block btn-bottom-margin btn-default btn-success"/>        
+        </form>
+      {% endif %} 
+    </div>
+    <div class="col-sm-3">
+      {% if user_attendence and user_attendence.out_time %}
+        <input type='submit' value='Check Out' class="btn btn-block btn-bottom-margin btn-default disabled" />
+      {% elif user_attendence %}   
+        <form method='post'>{% csrf_token %}      
+          <input type="hidden" name="type" value="2" />
+          <input type='submit' value='Check Out' class="btn btn-block btn-bottom-margin btn-default btn-danger" />
+        </form>
+      {% endif %}   
+    </div>                                
+  </div>
+  </div>
 {% endblock %}
 
 {% block content %}
-  <table class="table">
-        <thead class="thead-inverse">
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>In time</th>
-            <th>Out Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for attendence in attendences %}
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span>
+            <b>{{ date_today }}</b>
+          </span>
+          <span class="pull-right">
+            <b>Total present today: {{ user_length }}</b>
+          </span> 
+        </div>
+
+        <table class="table table-bordered table-hover">
+          <thead class="thead-inverse">
             <tr>
-              <td>
-                {{ attendence.user }}
-              </td>
-              <td>
-                {{ attendence.user.email }}
-              </td>
-              <td class="align-middle">
-                {{ attendence.in_time }}
-              </td>
-              <td class="align-middle">
-                {{ attendence.out_time }}
-              </td>
+              <th>Name</th>
+              <th>Email</th>
+              <th>In time</th>
+              <th>Out Time</th>
+              <th>Status</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {% for attendence in attendences %}
+              <tr>
+                <td>
+                  {{ attendence.user }}
+                </td>
+                <td>
+                  {{ attendence.user.email }}
+                </td>
+                <td class="align-middle">
+                  {{ attendence.in_time }}
+                </td>
+                <td class="align-middle">
+                  {% if attendence.out_time %}
+                    {{ attendence.out_time }}
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+                <td class="align-middle">
+                  {% if attendence.in_time <= today10am %}
+                    <span class="label label-success">On time</span>
+                  {% else %}
+                    <span class="label label-danger">Late</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>  
+      </div>
+    </div>
+    <div class="col-lg-4">
+      
+    </div>
+  </div>          
 {% endblock %}

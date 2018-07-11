@@ -26,8 +26,3 @@ class AttendenceTests(TestCase):
     	url = reverse('attendence')
     	response = self.client.get(url)
     	self.assertEquals(response.status_code, 200)
-
-    # def test_leave_tracker_view_not_found_status_code(self):
-    # 	url = reverse('leave_tracker', kwargs={'pk': 99})
-    # 	response = self.client.get(url)
-    # 	self.assertEquals(response.status_code, 404)
