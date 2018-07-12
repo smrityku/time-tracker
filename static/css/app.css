@@ -92,3 +92,7 @@ body .btn-bottom-margin {
 .table {
     margin-bottom: 0;
 }
+
+.monthly-summary-first-column {
+    width: 50%;
+}

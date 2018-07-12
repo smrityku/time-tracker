@@ -107,29 +107,41 @@
         <table class="table table-bordered table-hover">
           <tbody>          
             <tr>
-              <td>
+              <td class="monthly-summary-first-column">
                 Avg. in time
               </td>
               <td>
-                -
+                {% if user_info %}
+                  {{ user_info.0 }}
+                {% else %}
+                  -
+                {% endif %}
               </td>
             </tr>
 
             <tr>
-              <td>
+              <td class="monthly-summary-first-column">
                 Avg. hours
               </td>
               <td>
-                -
+                {% if user_info %}
+                  {{ user_info.1 }}
+                {% else %}
+                  -
+                {% endif %}
               </td>
             </tr>
 
             <tr>
-              <td>
+              <td class="monthly-summary-first-column">
                 Total hours
               </td>
               <td>
-                -
+                {% if user_info %}
+                  {{ user_info.2 }}
+                {% else %}
+                  -
+                {% endif %}
               </td>
             </tr>
           </tbody>
