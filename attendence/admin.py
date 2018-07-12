@@ -4,6 +4,9 @@ from .models import Leave
 from .models import LeaveTracker
 
 
-admin.site.register(Attendence)
+class AttendenceAdmin(admin.ModelAdmin):
+	list_display = ('user', 'check_in_date', 'in_time', 'out_time')
+
+admin.site.register(Attendence, AttendenceAdmin)
 admin.site.register(Leave)
 admin.site.register(LeaveTracker)
