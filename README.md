@@ -12,13 +12,7 @@ Install the requirements:
 sudo pip install -r requirements.txt
 ```
 
-Install mysqlclient:
-
-```bash
-pip install mysqlclient
-```
-
-Create the database:
+Open mysql console and create a empty database e.g 'timetracker_db'. Update settings.py in timetracker app and then run migration by following command:
 
 ```bash
 python manage.py migrate
