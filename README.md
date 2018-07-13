@@ -12,6 +12,12 @@ Install the requirements:
 sudo pip install -r requirements.txt
 ```
 
+Install mysqlclient:
+
+```bash
+pip install mysqlclient
+```
+
 Create the database:
 
 ```bash
@@ -22,6 +28,12 @@ Create Admin user:
 
 ```bash
 python manage.py createsuperuser
+```
+
+Run test Code:
+
+```bash
+python manage.py test
 ```
 
 Finally, run the development server:

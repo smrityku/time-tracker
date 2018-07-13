@@ -10,7 +10,7 @@ from .models import Attendence
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-def home(request):	
+def home(request):		
 	if request.user.is_authenticated:
 		now = datetime.datetime.now()
 		today10am = now.replace(hour=10, minute=0, second=0, microsecond=0)
@@ -20,11 +20,20 @@ def home(request):
 		except:		
 			user_attendence = {}
 
-		user_attendence_this_month = Attendence.objects.filter(check_in_date__year=datetime.date.today().year, check_in_date__month=datetime.date.today().month, user=request.user)
 		entry_time = 0
 		total_hours = 0
 		average_hours = 0
 		iterate = 0
+
+		if request.method == 'POST':
+			if request.POST['type'] == '1':
+				if not user_attendence:
+					Attendence.objects.create(user=request.user, check_in_date=datetime.datetime.now(), 
+						in_time=datetime.datetime.now().time(), created_at=datetime.datetime.now(), updated_at=datetime.datetime.now())
+			elif request.POST['type'] == '2':
+				user_attendence.update(out_time = datetime.datetime.now().time())
+
+		user_attendence_this_month = Attendence.objects.filter(check_in_date__year=datetime.date.today().year, check_in_date__month=datetime.date.today().month, user=request.user)
 
 		for attendence in user_attendence_this_month:
 			entry_time = entry_time + times_in_seconds(attendence.in_time)
@@ -42,20 +51,10 @@ def home(request):
 
 		user_info = [entry_time, average_hours, total_hours]
 
-
-		if request.method == 'POST':
-			if request.POST['type'] == '1':
-				if not user_attendence:
-					Attendence.objects.create(user=request.user, check_in_date=datetime.datetime.now(), 
-						in_time=datetime.datetime.now().time(), created_at=datetime.datetime.now(), updated_at=datetime.datetime.now())
-			elif request.POST['type'] == '2':
-				user_attendence.update(out_time = datetime.datetime.now().time())
-
 		try:
 			attendences = Attendence.objects.filter(check_in_date=datetime.datetime.now())
 		except:
 			attendences = {}
-
 		
 		return render(request, 'home.html', 
 			{'attendences': attendences, 'user_attendence': user_attendence.first, 'today10am': today10am, 
@@ -75,15 +74,13 @@ def leave_tracker(request, pk):
 	return render(request, 'home.html', {'attendences': attendences})
 
 def diff_times_in_seconds(t1, t2):
-	# caveat emptor - assumes t1 & t2 are python times, on the same day and t2 is after t1
 	h1, m1, s1 = t1.hour, t1.minute, t1.second
 	h2, m2, s2 = t2.hour, t2.minute, t2.second
 	t1_secs = s1 + 60 * (m1 + 60*h1)
 	t2_secs = s2 + 60 * (m2 + 60*h2)
-	return (t2_secs - t1_secs)
+	return abs(t2_secs - t1_secs)
 
 def times_in_seconds(t1):
-	# caveat emptor - assumes t1 & t2 are python times, on the same day and t2 is after t1
 	h1, m1, s1 = t1.hour, t1.minute, t1.second
 	t1_secs = s1 + 60 * (m1 + 60*h1)
 	return t1_secs
