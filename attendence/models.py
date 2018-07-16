@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Attendence(models.Model):
+class Attendance(models.Model):
     check_in_date = models.DateField(auto_now_add=True)
     in_time = models.TimeField(null=True)
     out_time = models.TimeField(null=True)

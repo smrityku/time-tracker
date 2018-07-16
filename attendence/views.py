@@ -6,7 +6,7 @@ import datetime
 import time
 from datetime import date
 
-from .models import Attendence
+from .models import Attendance
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
@@ -16,9 +16,9 @@ def home(request):
 		today10am = now.replace(hour=10, minute=0, second=0, microsecond=0)
 		user_info = []
 		try:
-			user_attendence = Attendence.objects.filter(check_in_date=datetime.datetime.now(), user=request.user)
+			user_attendence = Attendance.objects.filter(check_in_date=datetime.datetime.now(), user=request.user)
 		except:		
-			user_attendence = {}
+			user_Attendance = {}
 
 		entry_time = 0
 		total_hours = 0
@@ -28,12 +28,12 @@ def home(request):
 		if request.method == 'POST':
 			if request.POST['type'] == '1':
 				if not user_attendence:
-					Attendence.objects.create(user=request.user, check_in_date=datetime.datetime.now(), 
+					Attendance.objects.create(user=request.user, check_in_date=datetime.datetime.now(),
 						in_time=datetime.datetime.now().time(), created_at=datetime.datetime.now(), updated_at=datetime.datetime.now())
 			elif request.POST['type'] == '2':
 				user_attendence.update(out_time = datetime.datetime.now().time())
 
-		user_attendence_this_month = Attendence.objects.filter(check_in_date__year=datetime.date.today().year, check_in_date__month=datetime.date.today().month, user=request.user)
+		user_attendence_this_month = Attendance.objects.filter(check_in_date__year=datetime.date.today().year, check_in_date__month=datetime.date.today().month, user=request.user)
 
 		for attendence in user_attendence_this_month:
 			entry_time = entry_time + times_in_seconds(attendence.in_time)
@@ -52,7 +52,7 @@ def home(request):
 		user_info = [entry_time, average_hours, total_hours]
 
 		try:
-			attendences = Attendence.objects.filter(check_in_date=datetime.datetime.now())
+			attendences = Attendance.objects.filter(check_in_date=datetime.datetime.now())
 		except:
 			attendences = {}
 		
@@ -63,15 +63,15 @@ def home(request):
 	else:
 		return redirect('login')
 
-def attendence(request):
-	attendences = Attendence.objects.all()
+def attendance(request):
+	attendances = Attendance.objects.all()
 
-	return render(request, 'attendence.html', {'attendences': attendences})
+	return render(request, 'attendance.html', {'attendences': attendances})
 
 def leave_tracker(request, pk):
-	attendences = Attendence.objects.get(pk=pk)
+	attendances = Attendance.objects.get(pk=pk)
 
-	return render(request, 'home.html', {'attendences': attendences})
+	return render(request, 'home.html', {'attendances': attendances})
 
 def diff_times_in_seconds(t1, t2):
 	h1, m1, s1 = t1.hour, t1.minute, t1.second

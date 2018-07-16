@@ -16,6 +16,20 @@
           <a class="navbar-brand" href="{% url 'home' %}">
           <img alt="Logo" src="../static/img/nascenia-navbar-image.png" style="margin-top: -20px; margin-bottom: -14px;">
           </a>
+          <ul class="nav navbar-nav">
+            <li class="">
+              <a href="/attendances" style="color: #9d9d9d">Monthly TT</a>
+            </li>
+            <li class="">
+              <a href="/leave_tracker/95" style="color: #9d9d9d">My Leave</a>
+            </li>
+            <li class="">
+              <a href="/salaat_times" style="color: #9d9d9d">Salaat time</a>
+            </li>
+            <li>
+              <a href="/employees" style="color: #9d9d9d">Employee Info</a>
+            </li>
+          </ul>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -44,9 +58,10 @@
         </div>
       </nav>
       <div class="container">
-        {% block log-status %}
-        {% endblock %}
-        
+        <ol class="breadcrumb my-4">
+          {% block breadcrumb %}
+          {% endblock %}
+        </ol>
         {% block content %}
         {% endblock %}
       </div>
