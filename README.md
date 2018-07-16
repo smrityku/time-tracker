@@ -1,9 +1,12 @@
 ## Running the Project Locally
 
-First, clone the repository to your local machine:
+First, setup python3 and pip and then clone the repository to your local machine:
 
 ```bash
 git clone git@github.com:smrityku/time-tracker.git
+```
+```bash
+cd time-tracker
 ```
 
 Install the requirements:
