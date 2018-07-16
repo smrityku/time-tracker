@@ -3,7 +3,7 @@
 First, setup python3 and pip and then clone the repository to your local machine:
 
 ```bash
-git clone git@github.com:smrityku/time-tracker.git
+git clone https://github.com/smrityku/time-tracker.git
 ```
 ```bash
 cd time-tracker
