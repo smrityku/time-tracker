@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'timetracker_db',
         'USER': 'root',
-        'PASSWORD': '1233',
+        'PASSWORD': 'root',
         'HOST': '',
         'PORT': '',
     }
