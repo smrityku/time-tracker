@@ -6,12 +6,14 @@
 
 {% block content %}
 <div class="container" style="padding: 20px 0;">
-  <div id="monthly-attendance-table-filter" class="dataTables_filter">
-    <label>
-      Search:
-      <input type="search" placeholder aria-controls="monthly-attendance-table">
-    </label>
-    <button type="button" class="btn btn-secondary">Search</button>
+  <div id="monthly-attendance-table-filter" class="dataTables_filter col-sm-4">
+    <label><strong>Search:</strong></label>
+      <div style="display: inline-block;">
+        <form method='get' style="display: inline-flex;">
+        <input type="search" placeholder name="search" class="form-control" aria-controls="monthly-attendance-table">
+        <input type='submit' value='Search' class/>
+      </form>
+      </div>
   </div>
   <table class="table table-hover table-bordered no-footer dataTable" role="grid" style="width: 1168px;margin-top: 60px">
       <thead class="thead-inverse">

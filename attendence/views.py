@@ -46,7 +46,11 @@ def home(request):
 
 def attendance(request):
 	current_arr = []
-	users = User.objects.all()
+	if 'search' in request.GET and request.GET['search']:
+		query = request.GET['search']
+		users = User.objects.filter(username__icontains=query)
+	else:
+		users = User.objects.all()
 
 	for user in users:
 		current_arr.append(get_current_prev_month_summary(user))
@@ -63,6 +67,7 @@ def user_attendance(request, pk):
 													'user': user,
 													'check_in_date_year': datetime.date.today().year,
 													'check_in_date_month': datetime.date.today().strftime("%B")})
+
 
 def salaat_time(request):
 	return render(request, 'salaat_time.html')
