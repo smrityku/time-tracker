@@ -17,8 +17,8 @@
           <img alt="Logo" src="../static/img/nascenia-navbar-image.png" style="margin-top: -20px; margin-bottom: -14px;">
           </a>
           <ul class="nav navbar-nav">
-            <li class="">
-              <a href="/attendances" style="color: #9d9d9d">Monthly TT</a>
+            <li class="{% if request.resolver_match.url_name == 'attendance' %}active{% endif %}">
+              <a href="{% url 'attendance' %}" style="color: #9d9d9d">Monthly TT</a>
             </li>
             <li class="">
               <a href="/leave_tracker/95" style="color: #9d9d9d">My Leave</a>
@@ -58,10 +58,10 @@
         </div>
       </nav>
       <div class="container">
-        <ol class="breadcrumb my-4">
-          {% block breadcrumb %}
-          {% endblock %}
-        </ol>
+        {% block breadcrumb %}
+        {% endblock %}
+        {% block log-status %}
+        {% endblock %}
         {% block content %}
         {% endblock %}
       </div>

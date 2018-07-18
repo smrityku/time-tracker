@@ -6,6 +6,8 @@ class Attendance(models.Model):
     in_time = models.TimeField(null=True)
     out_time = models.TimeField(null=True)
     user = models.ForeignKey(User, related_name='attendences', on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)
+    total_hours = models.CharField(max_length=30, default='0')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)
 

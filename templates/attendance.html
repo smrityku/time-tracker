@@ -1,36 +1,63 @@
 {% extends 'base.html' %}
+{% load custom_tags %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item active">Welcome to time tracker</li>
 {% endblock %}
 
 {% block content %}
-  <table class="table">
-        <thead class="thead-inverse">
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>In time</th>
-            <th>Out Time</th>
+<div class="container" style="padding: 20px 0;">
+  <div id="monthly-attendance-table-filter" class="dataTables_filter">
+    <label>
+      Search:
+      <input type="search" placeholder aria-controls="monthly-attendance-table">
+    </label>
+    <button type="button" class="btn btn-secondary">Search</button>
+  </div>
+  <table class="table table-hover table-bordered no-footer dataTable" role="grid" style="width: 1168px;margin-top: 60px">
+      <thead class="thead-inverse">
+        <tr role="row">
+          <th rowspan="2" tabindex="0" aria-controls="monthly-attendance-table" colspan="1" style="width: 172px;">Name</th>
+          <th colspan="3" rowspan="1">{% current_month '%B, %Y' %}</th>
+          <th colspan="3" rowspan="1">{% prev_month '%B, %Y' %} </th>
+        </tr>
+        <tr>
+          <th tabindex="0" aria-controls="monthly-attendance-table" rowspan="1" colspan="1" style="width: 135px;">Average in time</th>
+          <th tabindex="0" aria-controls="monthly-attendance-table" rowspan="1" colspan="1" style="width: 135px;">Total hours</th>
+          <th tabindex="0" aria-controls="monthly-attendance-table" rowspan="1" colspan="1" style="width: 135px;">Average hours</th>
+          <th tabindex="0" aria-controls="monthly-attendance-table" rowspan="1" colspan="1" style="width: 135px;">Average in time</th>
+          <th tabindex="0" aria-controls="monthly-attendance-table" rowspan="1" colspan="1" style="width: 135px;">Total hours</th>
+          <th tabindex="0" aria-controls="monthly-attendance-table" rowspan="1" colspan="1" style="width: 135px;">Average hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attendance in current_arr %}
+          <tr role="row">
+            <td>
+              <a href="/attendance/{{attendance.0.id}}" target="_blank" style="color: #337ab7">
+              {{ attendance.0 }}
+              </a>
+            </td>
+            <td>
+              {{ attendance.1 }}
+            </td>
+            <td class="align-middle">
+              {{ attendance.3 }}
+            </td>
+            <td class="align-middle">
+              {{ attendance.2 }}
+            </td>
+            <td class="align-middle">
+              {{ attendance.4 }}
+            </td>
+            <td class="align-middle">
+              {{ attendance.6 }}
+            </td>
+            <td class="align-middle">
+              {{ attendance.5 }}
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {% for attendance in attendances %}
-            <tr>
-              <td>
-                {{ attendence.user }}
-              </td>
-              <td>
-                {{ attendence.user.email }}
-              </td>
-              <td class="align-middle">
-                {{ attendence.in_time }}
-              </td>
-              <td class="align-middle">
-                {{ attendence.out_time }}
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
 {% endblock %}

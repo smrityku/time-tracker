@@ -14,6 +14,8 @@ urlpatterns = [
 	url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
 	url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
 	url(r'^attendances/', views.attendance, name='attendance'),
+    url(r'^attendance/(?P<pk>\d+)/$', views.user_attendance, name='user_attendance'),
+	url(r'^salaat_times/', views.salaat_time, name='salaat_time'),
 	url(r'^leave_tracker/(?P<pk>\d+)/$', views.leave_tracker, name='leave_tracker'),
 	url(r'^admin/', admin.site.urls),
 ]

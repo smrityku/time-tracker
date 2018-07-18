@@ -6,7 +6,7 @@
     <div>
       {% if user_attendence %}
         <p id="message">Today's in time <b>{{ user_attendence.in_time }} </b>
-        {% if user_attendence.in_time <= today10am %}
+        {% if user_attendence.status %}
           <span class="label label-success">On time</span>
         {% else %}
           <span class="label label-danger">Late</span>
@@ -112,7 +112,7 @@
               </td>
               <td>
                 {% if user_info %}
-                  {{ user_info.0 }}
+                  {{ user_info.1 }}
                 {% else %}
                   -
                 {% endif %}
@@ -125,7 +125,7 @@
               </td>
               <td>
                 {% if user_info %}
-                  {{ user_info.1 }}
+                  {{ user_info.2 }}
                 {% else %}
                   -
                 {% endif %}
@@ -138,7 +138,7 @@
               </td>
               <td>
                 {% if user_info %}
-                  {{ user_info.2 }}
+                  {{ user_info.3 }}
                 {% else %}
                   -
                 {% endif %}
